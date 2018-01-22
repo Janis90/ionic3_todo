@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { Events, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Item } from '../../models/item.interface';
-import { ItemList } from '../../mocks/items.mocks';
 
 /**
- * Generated class for the HomePage page.
+ * Generated class for the AddItemPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -12,28 +11,28 @@ import { ItemList } from '../../mocks/items.mocks';
 
 @IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-add-item',
+  templateUrl: 'add-item.html',
 })
-export class HomePage {
+export class AddItemPage {
 
-  items: Item[];
+  item: Item;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private events: Events) {
 
-    this.items = ItemList;
+    this.item = {
+      title: '',
+      description: ''
+    }
+  }
 
-    this.events.subscribe('item:save', (item: Item) => {
-      this.items.push(item);
-    });
+  saveItem() {
+    this.events.publish('item:save', this.item);
+    this.navCtrl.pop();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
-  }
-
-  addItem() {
-    this.navCtrl.push('AddItemPage');
+    console.log('ionViewDidLoad AddItemPage');
   }
 
 }

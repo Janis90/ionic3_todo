@@ -1,3 +1,10 @@
 {
-  "TEST": "Test"
+  "PAGES": {
+    "HOME": {
+      "TITLE": "Home"
+    },
+    "ADD_ITEM": {
+      "TITLE": "Add a new Item"
+    }
+  }
 }

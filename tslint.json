@@ -9,6 +9,7 @@
     "trailing-comma": [false, {"multiline": "always", "singleline": "never"}],
     "interface-name": [false, "always-prefix"],
     "semicolon": [false, "always"],
+    "no-inferrable-types": false,
     // General
     "no-console": [true,
       "time",

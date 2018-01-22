@@ -13,7 +13,7 @@ export class MyApp {
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               private translate: TranslateService) {
 
-    translate.setDefaultLang('en');
+    this.translate.setDefaultLang('en');
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
