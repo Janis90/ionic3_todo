@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Events, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Item } from '../../models/item.interface';
-import { ItemList } from '../../mocks/items.mocks';
+import { DataProvider } from '../../providers/data/data';
 
 /**
  * Generated class for the HomePage page.
@@ -17,14 +17,28 @@ import { ItemList } from '../../mocks/items.mocks';
 })
 export class HomePage {
 
-  items: Item[];
+  items: Item[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private events: Events) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private dataProvider: DataProvider,
+              private events: Events) {
 
-    this.items = ItemList;
+    const self = this;
+    this.dataProvider.getItems()
+      .then((items: Item[]) => {
+
+      if (items) {
+        self.items = items;
+      }
+
+    })
+      .catch((e) => {
+        console.log(e);
+      });
 
     this.events.subscribe('item:save', (item: Item) => {
       this.items.push(item);
+      this.dataProvider.saveItems(this.items);
+
     });
   }
 
@@ -35,5 +49,4 @@ export class HomePage {
   addItem() {
     this.navCtrl.push('AddItemPage');
   }
-
 }
