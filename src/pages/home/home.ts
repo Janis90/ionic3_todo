@@ -22,15 +22,14 @@ export class HomePage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private dataProvider: DataProvider,
               private events: Events) {
 
-    const self = this;
     this.dataProvider.getItems()
       .then((items: Item[]) => {
 
-      if (items) {
-        self.items = items;
-      }
+        if (items) {
+          this.items = items;
+        }
 
-    })
+      })
       .catch((e) => {
         console.log(e);
       });
@@ -38,7 +37,6 @@ export class HomePage {
     this.events.subscribe('item:save', (item: Item) => {
       this.items.push(item);
       this.dataProvider.saveItems(this.items);
-
     });
   }
 
